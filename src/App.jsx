@@ -1,9 +1,12 @@
 import "./App.css";
+import GetStarted from "./components/getStarted";
 
 function App() {
   return (
     <>
-      <div></div>
+      <div>
+        <GetStarted />
+      </div>
     </>
   );
 }
