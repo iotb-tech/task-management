@@ -4,9 +4,12 @@ const AppContext = createContext();
 
 export const ContextProvider = ({ children }) => {
   const [isLightMode, setIsLightMode] = useState(true);
+  const [showBar, setShowBar] = useState(false);
 
   return (
-    <AppContext.Provider value={{ isLightMode, setIsLightMode }}>
+    <AppContext.Provider
+      value={{ isLightMode, setIsLightMode, showBar, setShowBar }}
+    >
       {children}
     </AppContext.Provider>
   );

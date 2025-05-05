@@ -3,36 +3,48 @@ import InfoCard from "./InfoCard";
 import infos from "../data/info";
 import userIcon from "../assets/userIcon.jpg";
 import { useAppContext } from "./ContextProvider";
+import dashboardIcon from "../assets/dashboardIcon.png";
 
 const Summary = () => {
-  const { isLightMode } = useAppContext();
+  const { isLightMode, showBar, setShowBar } = useAppContext();
 
   return (
     <div className="w-full">
       <div
-        className={`w-20 h-20 overflow-hidden rounded-lg shadow-xl mb-4 ${
-          isLightMode ? "border-[3px] border-[#19475B]" : ""
-        }`}
+        className="absolute left-10 block md:hidden"
+        onClick={() => {
+          setShowBar(true);
+          console.log(showBar);
+        }}
       >
-        <img src={userIcon} alt="" />
+        <img src={dashboardIcon} alt="" width={60} />
       </div>
-
-      <div>
-        <h3
-          className={`secondary-font text-3xl font-bold ${
-            isLightMode ? "text-[#19475B]" : ""
-          } `}
-        >
-          Hi, user
-        </h3>
-        <p
-          className={`primary-font text-md ${
-            isLightMode ? "text-[#19475B]" : ""
+      <div className="flex flex-col justify-start items-center md:items-start text-center md:text-start mb-6">
+        <div
+          className={`w-20 h-20 overflow-hidden rounded-lg shadow-xl mb-4 ${
+            isLightMode ? "border-[3px] border-[#19475B]" : ""
           }`}
         >
-          Below is your task review
-        </p>
+          <img src={userIcon} alt="" />
+        </div>
+        <div>
+          <h3
+            className={`secondary-font text-3xl font-bold ${
+              isLightMode ? "text-[#19475B]" : ""
+            } `}
+          >
+            Hi, user
+          </h3>
+          <p
+            className={`primary-font text-md ${
+              isLightMode ? "text-[#19475B]" : ""
+            }`}
+          >
+            Below is your task review
+          </p>
+        </div>
       </div>
+
       <h1
         className={`${
           isLightMode ? "text-[#19475B]" : "text-white"
