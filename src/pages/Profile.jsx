@@ -34,7 +34,7 @@ function Profile () {
             
         <div className="bg-gray-50 mx-auto lg:w-1/3  md:w-1/2 justify-items-center  rounded-xl  pb-20">
          <h1 className="text-5xl secondary-font mt-2 pt-10">Profile</h1>
-         <img src={animated_ashutosh}  alt="" className="mt-10 xl:size-48 md:size-24 max-sm:size-20"/>
+         <img src={animated_ashutosh}  alt="" className="mt-10 xl:size-24 md:size-24 max-sm:size-20"/>
          <h2 className="pt-4">Obayomi AbdulAfeez</h2>
          <p>Web Developer</p>
 
@@ -79,7 +79,7 @@ function Profile () {
              <div className="mt-4 ">
              <button  onClick={toggleMenuss} className="mt-3 lg:  rounded-md border-1 pl-4 xl:pr-40 md:pr-24 max-sm:pr-24 pt-1 pb-1 border-cyan-700">Task you are on presently</button>
              <div
-              className={`shadow-2xl rounded-xl mt-4 -ml-20 pl-3  pt-2 pb-2 card  max-sm:
+              className={`shadow-2xl rounded-xl mt-4  pl-3  pt-2 pb-2 card  max-sm:
               ${isOpens ? "block" : "hidden"}`} >  
               <p className="">Watching of videos on Redux</p>  
                 
