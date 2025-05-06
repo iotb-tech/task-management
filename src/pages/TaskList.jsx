@@ -1,5 +1,10 @@
-import { useState } from "react";
-import { FaTrash } from "react-icons/fa";
+// src/components/TaskList.js
+import React, { useState, useEffect } from 'react';
+import TaskHeader from '../components/TaskHeader';
+import StatusFilter from '../components/StatusFilter';
+import CategoryFilter from '../components/CategoryFilter';
+import TaskCard from '../components/TaskCard';
+
 
 const TaskList = () => {
     const taskData = [
@@ -42,72 +47,73 @@ const TaskList = () => {
 
     const [tasks, setTasks] = useState(taskData);
     const [filter, setFilter] = useState("all");
+    const categories = ["All", ...new Set(taskData.map((task) => task.category))];
+    const [categoryFilter, setCategoryFilter] = useState("All");
+
+    // State for date and time
+    const [currentTime, setCurrentTime] = useState(new Date());
+
+    // Update time every minute
+    useEffect(() => {
+        const timer = setInterval(() => setCurrentTime(new Date()), 60000);
+        return () => clearInterval(timer);
+    }, []);
+
+    // Format date and time
+    const formattedDate = currentTime.toLocaleDateString("en-NG", {
+        weekday: "long",
+        year: "numeric",
+        month: "long",
+        day: "numeric",
+    });
+    const formattedTime = currentTime.toLocaleTimeString("en-NG", {
+        hour: "2-digit",
+        minute: "2-digit",
+    });
+
+    // Weather information for Lagos
+    const weatherInfo = {
+        condition: "Mostly cloudy",
+        temperature: "91°F (33°C)",
+        forecast: "Sun and clouds",
+    };
 
     const handleDelete = (id) => {
         setTasks(tasks.filter((task) => task.id !== id));
     };
 
-    const filteredTasks =
-        filter === "all" ? tasks : tasks.filter((task) => task.status === filter);
+    const filteredTasks = tasks.filter((task) => {
+        const statusMatch = filter === "all" || task.status === filter;
+        const categoryMatch = categoryFilter === "All" || task.category === categoryFilter;
+        return statusMatch && categoryMatch;
+    });
 
     return (
         <div className="min-h-screen bg-gradient-to-br from-gray-100 to-gray-200 py-10">
             <div className="max-w-6xl mx-auto px-4">
                 <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-8">
-                    <h1 className="text-4xl font-bold primary-font text-gray-800 mb-4 sm:mb-0">
-                        Hi DevCode
-                    </h1>
-                    <div className="flex flex-wrap gap-2">
-                        <button
-                            onClick={() => setFilter("all")}
-                            className="px-4 py-2 bg-white border hover:bg-gray-100 text-gray-700 rounded shadow-sm transition"
-                        >
-                            All
-                        </button>
-                        <button
-                            onClick={() => setFilter("pending")}
-                            className="px-4 py-2 bg-yellow-200 hover:bg-yellow-300 text-yellow-900 rounded shadow-sm transition"
-                        >
-                            Pending
-                        </button>
-                        <button
-                            onClick={() => setFilter("completed")}
-                            className="px-4 py-2 bg-green-200 hover:bg-green-300 text-green-900 rounded shadow-sm transition"
-                        >
-                            Completed
-                        </button>
+                    <TaskHeader 
+                        formattedDate={formattedDate}
+                        formattedTime={formattedTime}
+                        weatherInfo={weatherInfo}
+                    />
+                    <div className="mt-3">
+                        <StatusFilter filter={filter} setFilter={setFilter} />
+                        <CategoryFilter
+                            categories={categories}
+                            categoryFilter={categoryFilter}
+                            setCategoryFilter={setCategoryFilter}
+                        />
                     </div>
+                </div>
+
+                <div>
+                    <p className="text-gray-600 primary-font text-xl text-center md:text-left mb-4">Manage your tasks efficiently.</p>
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                     {filteredTasks.map((task) => (
-                        <div
-                            key={task.id}
-                            className="relative primary-color primary-font p-5 rounded-lg shadow-md hover:shadow-lg transition-all duration-200 border border-gray-200"
-                        >
-                            <button
-                                onClick={() => handleDelete(task.id)}
-                                className="absolute top-3 right-3 text-red-500 hover:text-red-700 transition"
-                            >
-                                <FaTrash />
-                            </button>
-                            <h2 className="text-xl font-semibold mb-1">
-                                {task.title}
-                            </h2>
-                            <span className="inline-block text-xs font-medium bg-blue-100 text-blue-800 px-2 py-1 rounded mb-2">
-                                {task.category}
-                            </span>
-                            <p className=" text-sm mb-4">{task.info}</p>
-                            <span
-                                className={`inline-block text-xs font-medium px-2 py-1 rounded-full ${
-                                    task.status === "completed"
-                                        ? "bg-green-100 text-green-800"
-                                        : "bg-yellow-100 text-yellow-800"
-                                }`}
-                            >
-                                {task.status}
-                            </span>
-                        </div>
+                        <TaskCard key={task.id} task={task} handleDelete={handleDelete} />
                     ))}
                 </div>
             </div>
