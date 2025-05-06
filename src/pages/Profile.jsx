@@ -3,7 +3,7 @@ import { useState } from "react";
 import EditProfile from "./EditProfile";
 import { useAppContext } from "../components/ContextProvider";
 
-import animated_ashutosh from "../pages/animated_ashutosh.png";
+import animated_ashutosh from "../assets/animated_ashutosh.png";
 
 function Profile() {
   const { isLightMode } = useAppContext();

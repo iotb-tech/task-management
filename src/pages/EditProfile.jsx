@@ -1,5 +1,5 @@
 import React from "react";
-import animated_ashutosh from "../pages/animated_ashutosh.png";
+import animated_ashutosh from "../assets/animated_ashutosh.png";
 import { useState, useEffect } from "react";
 
 function EditProfile() {
