@@ -35,7 +35,7 @@ const SideBar = () => {
             isLightMode ? "" : "border-r border-white"
           } `}
         >
-          <Link to="/">
+          <Link to="/dashboard">
             <div className="flex gap-4 items-center">
               <img src={dashboardIcon} alt="" width={60} />
               <h4 className="secondary-font text-lg font-medium">Dashboard</h4>
@@ -44,17 +44,17 @@ const SideBar = () => {
         </div>
 
         <div className="p-6">
-          <Link to="/profile">
+          <Link to="/dashboard/profile">
             <p className="primary-color primary-font text-md p-2 rounded-sm my-2 hover:bg-white hover:text-[#19475B]">
               Profile
             </p>
           </Link>
-          <Link to="/add">
+          <Link to="/dashboard/add">
             <p className="primary-color primary-font text-md p-2 rounded-sm my-2 hover:bg-white hover:text-[#19475B]">
               Add Task
             </p>
           </Link>
-          <Link to="/list">
+          <Link to="/dashboard/list">
             <p className="primary-color primary-font text-md p-2 rounded-sm my-2 hover:bg-white hover:text-[#19475B]">
               Task List
             </p>
@@ -73,7 +73,7 @@ const SideBar = () => {
             isLightMode ? "" : "border-r border-white"
           } `}
         >
-          <Link to="/">
+          <Link to="/dashboard">
             <div className="flex gap-4 items-center ">
               <div
                 className="w-7 h-7 m-1 secondary-font text-xl font-light flex justify-center items-center border border-white rounded-md"
@@ -81,23 +81,28 @@ const SideBar = () => {
               >
                 x
               </div>
-              <h4 className="secondary-font text-lg font-medium">Dashboard</h4>
+              <h4
+                className="secondary-font text-lg font-medium"
+                onClick={() => setShowBar(false)}
+              >
+                Dashboard
+              </h4>
             </div>
           </Link>
         </div>
 
         <div className="p-6">
-          <Link to="/profile">
+          <Link to="/dashboard/profile" onClick={() => setShowBar(false)}>
             <p className="primary-color primary-font text-md p-2 rounded-sm my-2 hover:bg-white hover:text-[#19475B]">
               Profile
             </p>
           </Link>
-          <Link to="/add">
+          <Link to="/dashboard/add" onClick={() => setShowBar(false)}>
             <p className="primary-color primary-font text-md p-2 rounded-sm my-2 hover:bg-white hover:text-[#19475B]">
               Add Task
             </p>
           </Link>
-          <Link to="/list">
+          <Link to="/dashboard/list" onClick={() => setShowBar(false)}>
             <p className="primary-color primary-font text-md p-2 rounded-sm my-2 hover:bg-white hover:text-[#19475B]">
               Task List
             </p>
