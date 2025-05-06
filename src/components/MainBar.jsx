@@ -9,7 +9,7 @@ import Profile from "../pages/Profile";
 
 const MainBar = () => {
   return (
-    <div className="w-full h-screen py-4 px-10 ml-0 md:ml-60">
+    <div className="w-full min-h-screen py-4 px-10 ml-0 md:ml-60">
       <ToggleBtn />
       <DashIcon />
       <Routes>

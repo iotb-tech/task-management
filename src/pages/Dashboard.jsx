@@ -7,7 +7,11 @@ const Dashboard = () => {
   const { isLightMode } = useAppContext();
 
   return (
-    <div className={`h-[100%] ${isLightMode ? "" : "primary-color"}  flex`}>
+    <div
+      className={`min-h-screen ${
+        isLightMode ? "bg-gray-100" : "primary-color"
+      }  flex`}
+    >
       <SideBar />
       <MainBar />
     </div>
