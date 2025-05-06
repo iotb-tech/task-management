@@ -30,7 +30,7 @@ function Profile() {
         <div
           className={`${
             isLightMode ? "" : "border border-white"
-          }mx-auto lg:w-1/3  md:w-1/2 justify-items-center  rounded-xl  pb-20`}
+          } mx-auto lg:w-1/2 justify-items-center  rounded-xl  pb-20`}
         >
           <h1 className="text-5xl secondary-font mt-2 pt-10">Profile</h1>
           <img
