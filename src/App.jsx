@@ -7,13 +7,8 @@ import ForgottenPassword from "./components/forgottenPassword";
 
 function App() {
   return (
-    <Router>
-      <Routes>
-        <Route path="/" element={<GetStarted />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/forgotten-password" element={<ForgottenPassword />} />
-      </Routes>
-    </Router>
+    <>
+    </>
   );
 }
 
