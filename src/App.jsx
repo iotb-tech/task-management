@@ -1,8 +1,10 @@
+import Task from "./pages/Task"
 import "./App.css";
 
 function App() {
   return (
     <>
+    <Task />
     </>
   );
 }
