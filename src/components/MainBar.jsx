@@ -12,12 +12,14 @@ const MainBar = () => {
     <div className="w-full min-h-screen py-4 px-10 ml-0 md:ml-60">
       <ToggleBtn />
       <DashIcon />
-      <Routes>
-        <Route path="/" element={<Summary />}></Route>
-        <Route path="profile" element={<Profile />}></Route>
-        <Route path="list" element={<TaskList />}></Route>
-        <Route path="add" element={<Task />}></Route>
-      </Routes>
+      <div className="pt-12 md:pt-0">
+        <Routes>
+          <Route path="/" element={<Summary />}></Route>
+          <Route path="profile" element={<Profile />}></Route>
+          <Route path="list" element={<TaskList />}></Route>
+          <Route path="add" element={<Task />}></Route>
+        </Routes>
+      </div>
     </div>
   );
 };

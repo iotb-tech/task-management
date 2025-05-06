@@ -73,22 +73,22 @@ const SideBar = () => {
             isLightMode ? "" : "border-r border-white"
           } `}
         >
-          <Link to="/dashboard">
-            <div className="flex gap-4 items-center ">
-              <div
-                className="w-7 h-7 m-1 secondary-font text-xl font-light flex justify-center items-center border border-white rounded-md"
-                onClick={() => setShowBar(false)}
-              >
-                x
-              </div>
+          <div className="flex gap-4 items-center ">
+            <div
+              className="w-7 h-7 m-1 secondary-font text-xl font-light flex justify-center items-center border border-white rounded-md"
+              onClick={() => setShowBar(false)}
+            >
+              x
+            </div>
+            <Link to="/dashboard">
               <h4
                 className="secondary-font text-lg font-medium"
                 onClick={() => setShowBar(false)}
               >
                 Dashboard
               </h4>
-            </div>
-          </Link>
+            </Link>
+          </div>
         </div>
 
         <div className="p-6">

@@ -27,15 +27,19 @@ function Profile() {
       {showProfile ? (
         <EditProfile />
       ) : (
-        <div className="mx-auto lg:w-1/3  md:w-1/2 justify-items-center  rounded-xl  pb-20">
+        <div
+          className={`${
+            isLightMode ? "" : "border border-white"
+          }mx-auto lg:w-1/3  md:w-1/2 justify-items-center  rounded-xl  pb-20`}
+        >
           <h1 className="text-5xl secondary-font mt-2 pt-10">Profile</h1>
           <img
             src={animated_ashutosh}
             alt=""
             className="mt-10 xl:size-24 md:size-24 max-sm:size-20"
           />
-          <h2 className="pt-4">Obayomi AbdulAfeez</h2>
-          <p>Web Developer</p>
+          <h2 className="pt-4">Aderolu Lateefah Adesola</h2>
+          <p>Software Developer</p>
 
           <button
             onClick={() => setEditProfile(true)}
@@ -45,7 +49,11 @@ function Profile() {
           </button>
 
           <div className="flex">
-            <div className="primary-color mt-5 pt-1 pb-1 xl:pl-8 xl:pr-8 md:pr-8 md:pl-8 rounded-md max-sm:pl-3 max-sm:pr-3">
+            <div
+              className={`${
+                isLightMode ? "primary-color" : "bg-cyan-950"
+              }  mt-5 pt-1 pb-1 xl:pl-8 xl:pr-8 md:pr-8 md:pl-8 rounded-md max-sm:pl-3 max-sm:pr-3`}
+            >
               <p className="text-center">3</p>
               <p>Completed task</p>
             </div>
@@ -60,9 +68,10 @@ function Profile() {
               <div className="mb-6 xl:-ml-1">
                 <button
                   onClick={toggleMenu}
-                  className="mt-3  pl-3 xl:pr-48 md:pr-32 max-sm:pr-32 pt-1 pb-1 rounded-md border-1 border-cyan-700 "
+                  className={`${
+                    isLightMode ? "border-1 border-cyan-700" : "bg-cyan-950"
+                  } mt-3  pl-3 xl:pr-48 md:pr-32 max-sm:pr-32 pt-1 pb-1 rounded-md  `}
                 >
-                  {" "}
                   List of completed task
                 </button>
                 <div
@@ -77,7 +86,9 @@ function Profile() {
               <div className="mt-3   ">
                 <button
                   onClick={toggleMenus}
-                  className="pl-5 xl:pr-48 md:pr-32 max-sm:pr-32 pt-1 pb-1 rounded-md border-cyan-700 border-1"
+                  className={`${
+                    isLightMode ? "border-1 border-cyan-700" : "bg-cyan-950"
+                  } pl-5 xl:pr-48 md:pr-32 max-sm:pr-32 pt-1 pb-1 rounded-md`}
                 >
                   List of pending tasks
                 </button>
@@ -92,7 +103,9 @@ function Profile() {
               <div className="mt-4 ">
                 <button
                   onClick={toggleMenuss}
-                  className="mt-3 lg:  rounded-md border-1 pl-4 xl:pr-40 md:pr-24 max-sm:pr-24 pt-1 pb-1 border-cyan-700"
+                  className={`${
+                    isLightMode ? "border-1 border-cyan-700" : "bg-cyan-950"
+                  } mt-3 lg:  rounded-md  pl-4 xl:pr-40 md:pr-24 max-sm:pr-24 pt-1 pb-1 `}
                 >
                   Task you are on presently
                 </button>
