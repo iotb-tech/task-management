@@ -61,8 +61,11 @@ const SideBar = () => {
           </Link>
         </div>
       </div>
+
       <div
-        className={`min-w-60 min-h-screen fixed secondary-color block md:hidden`}
+        className={`min-w-60 min-h-screen fixed secondary-color ${
+          showBar ? "block" : "hidden"
+        } md:hidden shadow-2xl z-[2]`}
         ref={showBarRef}
       >
         <div
@@ -71,8 +74,13 @@ const SideBar = () => {
           } `}
         >
           <Link to="/">
-            <div className="flex gap-4 items-center">
-              <img src={dashboardIcon} alt="" width={60} />
+            <div className="flex gap-4 items-center ">
+              <div
+                className="w-7 h-7 m-1 secondary-font text-xl font-light flex justify-center items-center border border-white rounded-md"
+                onClick={() => setShowBar(false)}
+              >
+                x
+              </div>
               <h4 className="secondary-font text-lg font-medium">Dashboard</h4>
             </div>
           </Link>

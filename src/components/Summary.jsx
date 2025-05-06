@@ -3,23 +3,13 @@ import InfoCard from "./InfoCard";
 import infos from "../data/info";
 import userIcon from "../assets/userIcon.jpg";
 import { useAppContext } from "./ContextProvider";
-import dashboardIcon from "../assets/dashboardIcon.png";
 
 const Summary = () => {
   const { isLightMode, showBar, setShowBar } = useAppContext();
 
   return (
     <div className="w-full">
-      <div
-        className="absolute left-10 block md:hidden"
-        onClick={() => {
-          setShowBar(true);
-          console.log(showBar);
-        }}
-      >
-        <img src={dashboardIcon} alt="" width={60} />
-      </div>
-      <div className="flex flex-col justify-start items-center md:items-start text-center md:text-start mb-6">
+      <div className="flex flex-col justify-start items-center md:items-start text-center md:text-start mt-12 md:mt-0 mb-6">
         <div
           className={`w-20 h-20 overflow-hidden rounded-lg shadow-xl mb-4 ${
             isLightMode ? "border-[3px] border-[#19475B]" : ""
