@@ -11,7 +11,8 @@ const Task = () => {
         const [category, setCategory] = useState('');
         const [showDropdown, setShowDropdown] = useState(false);
 
-    const handleAddTask = () => {
+    const handleAddTask = (e) => {
+      e.preventDefault();
         if (title && description) {
             setTasks([...tasks, { title, description, done: false, cancelled: false,category },]);
             setTitle('');
@@ -33,23 +34,27 @@ const Task = () => {
       };
 
     return (
-        <div className="flex flex-col">
+        <div className="flex flex-col px-4 md:px-12 py-4">
            
         <div className="justify-center items-center flex m-12">
-            <h1 className="text-4xl font-bold">Create New Task</h1>
+            <h1 className="text-2xl md:text-4xl font-bold">Create New Task</h1>
         </div>
 
-        <div className="flex flex-row justify-between h-12 pt-2 px-6  primary-color">
+        <div className="flex flex-row justify-between h-20 md:h-12 pt-2 px-6 primary-color gap-6 md:gap-0">
             <h2 className="text-lg font-semibold ">Welcome Ahishat,</h2>
-            <div className="relative flex flex-row gap-2">
+            <div className="relative flex flex-col md:flex-row md:gap-2 gap-0 items-center">
             <h2 className="text-md font-medium ">Categories:</h2>
             <BiCategoryAlt  
             className="flex mt-2" 
             onClick={() => setShowDropdown(!showDropdown)}/>
-            
+            {category && (
+          <span className={`ml-2 text-sm italic ${categoryStyles[category]}`}>
+            {category}
+          </span>
+        )}
   {showDropdown && (
-    <div className="absolute top-8 right-4 z-10 border secondary-color rounded shadow-md w-32">
-      {categoryOptions.map(({ label, icon, color }) => (
+    <div className="absolute top-8 right-0 md:right-4 z-10 border secondary-color rounded shadow-md w-32">
+      {categoryOptions.map(({ label, color }) => (
         <div
           key={label}
           className={`flex items-center gap-2 px-3 py-1 hover:bg-emerald-50 cursor-pointer text-sm ${color}`}
@@ -58,7 +63,7 @@ const Task = () => {
             setShowDropdown(false);
           }}
         >
-          {icon} {label}
+           {label}
         </div>
       ))}
     </div>
@@ -67,30 +72,30 @@ const Task = () => {
             </div>
             </div>
 
-        <div className="flex flex-row gap-12  mt-10 justify-center items-center">
-        <div className="flex flex-row gap-2">
+        <div className="flex flex-col w-full max-w-6xl md:flex-row gap-6 md:gap-12 items-center md:justify-center md:mt-10 mt-4">
+        <div className="flex flex-col md:flex-row items-start   gap-1 md:gap-2 w-full md:w-auto">
             <h2 className="text-md font-medium">Task Title:</h2>
             <input type="text" 
             value={title}
             onChange={(e) => setTitle(e.target.value)} 
             placeholder="Enter Task Title" 
-            className="border-black shadow-green-800 shadow bg-gray-100 rounded w-48 h-8 pl-2"/>
+            className="border-black shadow-green-800 shadow bg-gray-100 rounded w-full md:w-48 h-8 pl-2"/>
         </div>
-        <div className="flex flex-row gap-2 ">
+        <div className="flex flex-col md:flex-row gap-1 md:gap-2 items-start  w-full md:w-auto">
             <h2 className="text-md font-medium">Task Description:</h2>
             <input type="text" value={description}
             onChange={(e) => setDescription(e.target.value)}
             placeholder="Enter Task Title" 
-            className="border-black shadow-green-800 shadow bg-gray-100 rounded w-96 h-8 pl-2"/>
+            className="border-black shadow-green-800 shadow bg-gray-100 rounded w-full md:w-96 h-8 pl-2"/>
         </div>
        
-        <div onClick={handleAddTask} className="primary-color flex justify-center items-center w-16 h-10 rounded">
+        <div onClick={handleAddTask} className="primary-color flex justify-center items-center w-full md:w-16 h-10 rounded mt-2 md:mt-0">
             <button className="text-sm ">Add</button>
         </div>
     
         </div>
 
-        <div className="mt-10 px-12">
+        <div className="mt-10 px-4 w-full max-w-6xl">
   <h2 className="text-xl font-semibold mb-4">Added Tasks:</h2>
   <div className="flex flex-col gap-4">
   {tasks.map((task, index) => (
