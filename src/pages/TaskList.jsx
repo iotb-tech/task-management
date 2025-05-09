@@ -4,6 +4,7 @@ import TaskHeader from '../components/TaskHeader';
 import StatusFilter from '../components/StatusFilter';
 import CategoryFilter from '../components/CategoryFilter';
 import TaskCard from '../components/TaskCard';
+import { useAppContext } from '../components/ContextProvider';
 
 
 const TaskList = () => {
@@ -50,6 +51,8 @@ const TaskList = () => {
     const categories = ["All", ...new Set(taskData.map((task) => task.category))];
     const [categoryFilter, setCategoryFilter] = useState("All");
 
+    const { isLightMode } = useAppContext();
+
     // State for date and time
     const [currentTime, setCurrentTime] = useState(new Date());
 
@@ -89,7 +92,7 @@ const TaskList = () => {
     });
 
     return (
-        <div className="min-h-screen bg-gradient-to-br from-gray-100 to-gray-200 py-10">
+        <div className="min-h-screen py-10">
             <div className="max-w-6xl mx-auto px-4">
                 <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-8">
                     <TaskHeader 
@@ -106,9 +109,9 @@ const TaskList = () => {
                         />
                     </div>
                 </div>
-
+                
                 <div>
-                    <p className="text-gray-600 primary-font text-xl text-center md:text-left mb-4">Manage your tasks efficiently.</p>
+                    <p className={`primary-font text-xl text-center md:text-left mb-4 ${isLightMode ? "text-gray-600" : "text-white"}`}>Manage your tasks efficiently.</p>
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
