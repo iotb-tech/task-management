@@ -1,23 +1,25 @@
-import React from "react";
-import { IoMdArrowForward } from "react-icons/io";
-import { motion } from "framer-motion";
-import Pic1 from "../assets/taskmgt3.avif";
-import Pic2 from "../assets/taskmgt2.png";
-import Pic3 from "../assets/taskmgtpic1.png";
-import { useNavigate } from "react-router-dom";
+import React from 'react';
+import { IoMdArrowForward } from 'react-icons/io';
+import { motion } from 'framer-motion';
+import Pic1 from '../assets/taskmgt3.avif';
+import Pic2 from '../assets/taskmgt2.png';
+import Pic3 from '../assets/taskmgtpic1.png';
+import { useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 const GetStarted = () => {
   const navigate = useNavigate();
-
+  const authUser = useSelector((state) => state.auth);
+  const { isLoggedIn, user } = authUser;
+  console.log('User:', user, 'Logged In:', isLoggedIn);
   return (
     <div className="primary-color min-h-screen flex flex-col items-center justify-center relative px-4 overflow-hidden">
-      
       {/* Image Animation*/}
       <motion.div
         className="flex justify-center items-center gap-4 flex-wrap mb-10"
         initial={{ opacity: 0, y: -100 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 1, ease: "easeOut" }}
+        transition={{ duration: 1, ease: 'easeOut' }}
       >
         {/* Small Screen*/}
         <motion.img
@@ -54,7 +56,7 @@ const GetStarted = () => {
             transition={{
               duration: 0.8,
               delay: 0.4 + index * 0.3, // Delay each one a bit more
-              ease: "easeOut",
+              ease: 'easeOut',
             }}
           />
         ))}
@@ -74,12 +76,12 @@ const GetStarted = () => {
             Develop effective task management with our easy-to-use app
           </h3>
           <motion.button
-            onClick={() => navigate("/login")}
+            onClick={() => navigate('/login')}
             className="flex items-center gap-2 px-6 py-3 cursor-pointer bg-white hover:bg-black hover:text-white text-black font-2xl rounded-full transition duration-300"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
           >
-            Get Started <IoMdArrowForward />
+            {isLoggedIn ? `Welcome ${user.name} - Continue to dashboard` : 'Get Started'}
           </motion.button>
         </div>
       </motion.div>

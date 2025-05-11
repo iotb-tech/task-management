@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { Link } from "react-router";
+import React, { useState } from 'react';
+import { Link } from 'react-router';
 
 const Login = () => {
   const [showLogin, setShowLogin] = useState(false);
@@ -8,14 +8,10 @@ const Login = () => {
     <div className="p-8 flex flex-col bg-white">
       {showLogin ? (
         <>
-          <h3 className="text-xl font-semibold text-[#19475b] mb-6 text-center">
-            Log In
-          </h3>
+          <h3 className="text-xl font-semibold text-[#19475b] mb-6 text-center">Log In</h3>
           <form action="#" method="POST" className="space-y-5">
             <div>
-              <label className="block text-sm font-medium text-[#19475b] mb-1">
-                Email
-              </label>
+              <label className="block text-sm font-medium text-[#19475b] mb-1">Email</label>
               <input
                 type="email"
                 placeholder="Enter your email"
@@ -23,9 +19,7 @@ const Login = () => {
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-[#19475b] mb-1">
-                Password
-              </label>
+              <label className="block text-sm font-medium text-[#19475b] mb-1">Password</label>
               <input
                 type="password"
                 placeholder="Enter your password"
@@ -41,7 +35,7 @@ const Login = () => {
           </form>
           <div className="text-left mt-4">
             <Link
-              to="/forgotten-password"
+              to="/forgot-password"
               href="#"
               className="text-sm text-black hover:underline transition"
             >
@@ -51,14 +45,10 @@ const Login = () => {
         </>
       ) : (
         <>
-          <h2 className="text-2xl font-bold text-[#19475b] mb-4 text-center">
-            Create an Account
-          </h2>
+          <h2 className="text-2xl font-bold text-[#19475b] mb-4 text-center">Create an Account</h2>
           <form action="#" method="POST" className="space-y-6">
             <div>
-              <label className="block text-sm font-medium text-[#19475b] mb-1">
-                Name
-              </label>
+              <label className="block text-sm font-medium text-[#19475b] mb-1">Name</label>
               <input
                 type="text"
                 placeholder="Enter your name"
@@ -66,9 +56,7 @@ const Login = () => {
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-[#19475b] mb-1">
-                Email
-              </label>
+              <label className="block text-sm font-medium text-[#19475b] mb-1">Email</label>
               <input
                 type="email"
                 placeholder="Enter your email"
@@ -113,8 +101,7 @@ const Login = () => {
         <>
           <h2 className="text-3xl font-bold mb-4">First time here? Awesome.</h2>
           <p className="mb-6">
-            Sign up to plan smarter, work better, and get more done — with less
-            stress.
+            Sign up to plan smarter, work better, and get more done — with less stress.
           </p>
           <button
             onClick={() => setShowLogin(false)}
@@ -127,8 +114,8 @@ const Login = () => {
         <>
           <h2 className="text-3xl font-bold mb-4">Welcome back!</h2>
           <p className="mb-6 w-full max-w-md px-4 mx-auto text-center">
-            Let's make today a productive one — no pressure, just progress. Log
-            in to get your tasks done.
+            Let's make today a productive one — no pressure, just progress. Log in to get your tasks
+            done.
           </p>
           <button
             onClick={() => setShowLogin(true)}

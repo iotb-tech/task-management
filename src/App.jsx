@@ -16,9 +16,9 @@ function App() {
               <Route path="/" element={<GetStarted />}></Route>
               <Route path="/dashboard/*" element={<Dashboard />}></Route>
               <Route path="/login" element={<Login />}></Route>
-              <Route path="/" element={<ForgottenPassword />}></Route>
+              <Route path="/forgot-password" element={<ForgottenPassword />}></Route>
             </Routes>
-          </Router>
+          </Router>   
         </ContextProvider>
       </div>
     </>
