@@ -16,7 +16,10 @@ function App() {
               <Route path="/" element={<GetStarted />}></Route>
               <Route path="/dashboard/*" element={<Dashboard />}></Route>
               <Route path="/login" element={<Login />}></Route>
-              <Route path="/" element={<ForgottenPassword />}></Route>
+              <Route
+                path="/forgotten-password"
+                element={<ForgottenPassword />}
+              ></Route>
             </Routes>
           </Router>
         </ContextProvider>
