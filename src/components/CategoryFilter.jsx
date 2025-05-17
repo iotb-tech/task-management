@@ -8,7 +8,7 @@ const CategoryFilter = ({ categories, categoryFilter, setCategoryFilter }) => {
             <button
                 key={category}
                 onClick={() => setCategoryFilter(category)}
-                className={`px-4 py-2 rounded shadow-sm transition border cursor-pointer ${
+                className={`px-4 py-2 rounded shadow-sm transition border cursor-pointer flex-nowrap overflow-auto ${
                 categoryFilter === category
                     ? "ring-2 ring-[#287291] text-gray-700 font-semibold"
                     : "primary-color hover:bg-[#19475b]"

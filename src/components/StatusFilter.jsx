@@ -6,7 +6,7 @@ const StatusFilter = ({ filter, setFilter }) => {
             <button
                 key={status}
                 onClick={() => setFilter(status)}
-                className={`px-4 py-2 rounded shadow-sm transition ${
+                className={`px-4 py-2 rounded shadow-sm transition flex-nowrap overflow-auto ${
                 filter === status
                     ? status === 'pending'
                     ? 'bg-yellow-500 text-yellow-900 font-semibold ring-2 ring-yellow-900'

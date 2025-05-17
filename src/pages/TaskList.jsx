@@ -1,11 +1,9 @@
-// src/components/TaskList.js
 import React, { useState, useEffect } from 'react';
 import TaskHeader from '../components/TaskHeader';
 import StatusFilter from '../components/StatusFilter';
 import CategoryFilter from '../components/CategoryFilter';
 import TaskCard from '../components/TaskCard';
 import { useAppContext } from '../components/ContextProvider';
-
 
 const TaskList = () => {
     const taskData = [
@@ -53,16 +51,13 @@ const TaskList = () => {
 
     const { isLightMode } = useAppContext();
 
-    // State for date and time
     const [currentTime, setCurrentTime] = useState(new Date());
 
-    // Update time every minute
     useEffect(() => {
         const timer = setInterval(() => setCurrentTime(new Date()), 60000);
         return () => clearInterval(timer);
     }, []);
 
-    // Format date and time
     const formattedDate = currentTime.toLocaleDateString("en-NG", {
         weekday: "long",
         year: "numeric",
@@ -74,7 +69,6 @@ const TaskList = () => {
         minute: "2-digit",
     });
 
-    // Weather information for Lagos
     const weatherInfo = {
         condition: "Mostly cloudy",
         temperature: "91°F (33°C)",
@@ -92,15 +86,16 @@ const TaskList = () => {
     });
 
     return (
-        <div className="min-h-screen py-10">
-            <div className="max-w-6xl mx-auto px-4">
-                <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-8">
+        <div className="min-h-screen py-4 px-2 sm:px-6 md:px-8 mt-1 md:mt-12">
+            <div className="max-w-screen-xl mx-auto">
+                {/* Header + Filters */}
+                <div className="flex flex-col gap-4 sm:gap-6 sm:flex-row sm:items-start sm:justify-between mb-8">
                     <TaskHeader 
                         formattedDate={formattedDate}
                         formattedTime={formattedTime}
                         weatherInfo={weatherInfo}
                     />
-                    <div className="mt-3">
+                    <div className="flex flex-col gap-3">
                         <StatusFilter filter={filter} setFilter={setFilter} />
                         <CategoryFilter
                             categories={categories}
@@ -109,12 +104,14 @@ const TaskList = () => {
                         />
                     </div>
                 </div>
-                
-                <div>
-                    <p className={`primary-font text-xl text-center md:text-left mb-4 ${isLightMode ? "text-gray-600" : "text-white"}`}>Manage your tasks efficiently.</p>
-                </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {/* Heading */}
+                <p className={`primary-font text-lg sm:text-xl text-left  mb-6 ${isLightMode ? "text-gray-600" : "text-white"}`}>
+                    Manage your tasks efficiently.
+                </p>
+
+                {/* Task Cards */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                     {filteredTasks.map((task) => (
                         <TaskCard key={task.id} task={task} handleDelete={handleDelete} />
                     ))}
