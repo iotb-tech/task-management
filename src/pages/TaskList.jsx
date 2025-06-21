@@ -100,7 +100,7 @@ const TaskList = () => {
                         formattedTime={formattedTime}
                         weatherInfo={weatherInfo}
                     />
-                    <div className="mt-3">
+                    <div className="mt-5">
                         <StatusFilter filter={filter} setFilter={setFilter} />
                         <CategoryFilter
                             categories={categories}

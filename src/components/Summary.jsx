@@ -12,7 +12,7 @@ const Summary = () => {
       <div className="flex flex-col justify-start items-center md:items-start text-center md:text-start mb-6">
         <div
           className={`w-20 h-20 overflow-hidden rounded-lg shadow-xl mb-4 ${
-            isLightMode ? "border-[3px] border-[#19475B]" : ""
+            isLightMode ? "border-[3px] border-[#35b5ec]" : ""
           }`}
         >
           <img src={userIcon} alt="" />
@@ -38,11 +38,11 @@ const Summary = () => {
       <h1
         className={`${
           isLightMode ? "text-[#19475B]" : "text-white"
-        } text-center primary-font text-4xl font-bold mb-8`}
+        } text-center primary-font text-3xl font-bold mb-8`}
       >
         Task Review
       </h1>
-      <div className="flex flex-wrap justify-center gap-[4%]">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {infos.map((inf, index) => (
           <InfoCard
             key={index}
