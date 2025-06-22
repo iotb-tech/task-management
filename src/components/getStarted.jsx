@@ -23,7 +23,7 @@ const GetStarted = () => {
         <motion.img
           src={Pic1}
           alt="Task"
-          className="block md:hidden w-48 h-42 object-cover absolute top-1/2 right-0 transform -translate-y-1/2 mb-16 mr-6 rounded-xl"
+          className="block md:hidden rounded-xl"
           initial={{ x: 100, opacity: 0 }}
           animate={{ x: 0, opacity: 1 }}
           transition={{ duration: 1, delay: 0.1 }}
@@ -61,20 +61,20 @@ const GetStarted = () => {
       </motion.div>
 
       <motion.div
-        className="mt-[400px] md:mt-6 lg:mt-6 px-4 sm:px-8 md:px-16 w-full"
+        className="md:mt-6 lg:mt-6 px-4 sm:px-8 w-full"
         initial={{ opacity: 0, y: 50 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 1, delay: 1.2 }}
       >
         <div className="text-center lg:text-left flex flex-col items-center lg:items-start">
-          <h1 className="mb-4 font-bold secondary-font text-3xl sm:text-xl md:text-2xl text-white">
+          <h1 className="mb-4 font-bold secondary-font text-2xl sm:text-xl md:text-3xl text-white">
             MANAGE YOUR <br /> DAILY TASKS
           </h1>
           <h3 className="text-white mb-6 sm:text-base md:text-lg">
             Develop effective task management with our easy-to-use app
           </h3>
           <motion.button
-            onClick={() => navigate("/login")}
+            onClick={() => navigate("/signup")}
             className="flex items-center gap-2 px-6 py-3 cursor-pointer bg-white hover:bg-black hover:text-white text-black font-2xl rounded-full transition duration-300"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}

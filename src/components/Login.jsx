@@ -1,45 +1,104 @@
 import React, { useState } from "react";
 import { Link } from "react-router";
+import Pic2 from "../assets/taskmgt2.png";
+import { motion } from "framer-motion";
 
 const Login = () => {
-  const [showLogin, setShowLogin] = useState(false);
 
-  const FormPanel = (
-    <div className="p-8 flex flex-col bg-white">
-      {showLogin ? (
-        <>
-          <h3 className="text-xl font-semibold text-[#19475b] mb-6 text-center">
-            Log In
-          </h3>
-          <form action="#" method="POST" className="space-y-5">
-            <div>
-              <label className="block text-sm font-medium text-[#19475b] mb-1">
-                Email
+  const [formData, setFormData] = useState({
+    email: "",
+    password: "",
+  });
+const handleChange = (e) => {
+  setFormData ({
+    ...formData, [e.target.name] : e.target.value,
+  })
+}
+const handleSubmit = (e) => {
+  e.preventDefault();
+  console.log(formData)
+}
+
+  return(
+    <div className="flex w-full min-h-screen gap-12">
+      {/* left */}
+       <div className="lg:flex flex-col hidden  bg-[#19475b] w-1/2 gap-4 lg:pt-14 lg:px-12 px-4"> 
+          <h2 className="flex text-3xl font-bold gap-2 text-white">New Here ? </h2>
+          <p className="flex text-md text-white">Sign up and start creating plans for future.</p>
+
+          <motion.div
+                  className="flex justify-center items-center gap-4 flex-wrap mb-8"
+                  initial={{ opacity: 0, y: -100 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 1, ease: "easeOut" }}
+                >
+                    <motion.img
+          src={Pic2}
+          alt="Task"
+          className=" rounded-xl"
+          initial={{ x: 100, opacity: 0 }}
+          animate={{ x: 0, opacity: 1 }}
+          transition={{ duration: 1, delay: 0.1 }}
+        />
+
+                </motion.div>
+                
+          <div className="flex justify-center">
+            <Link to="/signup">
+            <button
+            onClick={() => setShowLogin(true)}
+            className="bg-white text-[#19475b] px-6 py-3 lg:w-36 rounded-lg my-6 cursor-pointer hover:bg-[#19475b] hover:text-white transition duration-300 shadow-lg hover:shadow-cyan-300 hover:shadow-2xl font-semibold"
+          >
+            Sign Up
+          </button></Link>
+            
+          </div>
+           
+       </div>
+       {/* right */}
+       <div className="flex flex-col lg:w-1/2 md:justify-center lg:px-16 lg:pt-4 px-4">
+        <div className="flex flex-col gap-4 lg:justify-center ">
+        <h2 className="text-3xl font-bold  lg:-mt-48 mt-12 text-center">Already have an Account with Us ?</h2>
+      </div>
+      
+          
+            <div className="flex justify-between flex-wrap items-center lg:-mt-8 mt-8">
+              <label className="flex text-sm font-medium text-[#19475b] mb-2">
+                Email:
               </label>
               <input
                 type="email"
+                name="email"
+                value={formData.email}
+                onChange={handleChange}
                 placeholder="Enter your email"
-                className="p-2 border border-gray-300 w-[300px] rounded mb-4 focus:outline-none focus:ring-2"
+                className="p-2 border border-gray-300 lg:w-72 w-52 rounded mb-4 focus:outline-none focus:ring-2"
               />
             </div>
-            <div>
+            <div className="flex justify-between flex-wrap items-center">
               <label className="block text-sm font-medium text-[#19475b] mb-1">
-                Password
+                Password:
               </label>
               <input
                 type="password"
+                name="password"
+                value={formData.password}
+                onChange={handleChange}
                 placeholder="Enter your password"
-                className="p-2 border w-[300px] border-gray-300 rounded mb-4 focus:outline-none focus:ring-2"
+                className="p-2 border w-52 lg:w-72 border-gray-300 rounded mb-4 focus:outline-none focus:ring-2"
               />
             </div>
-            <button
+            <div className="flex justify-center pt-8">
+              <button
               type="submit"
-              className="bg-white text-black px-6 py-3 rounded-full my-6 cursor-pointer hover:bg-gray-100 transition duration-300 shadow-md hover:shadow-lg font-semibold"
+              onClick={handleSubmit}
+              className="bg-[#19475b] text-white w-36 h-12 rounded-xl"
             >
               Log In
             </button>
-          </form>
-          <div className="text-left mt-4">
+            </div>
+            
+                      <div className="text-left pt-6 mt-2">
             <Link
               to="/forgotten-password"
               href="#"
@@ -48,115 +107,16 @@ const Login = () => {
               Forgotten password?
             </Link>
           </div>
-        </>
-      ) : (
-        <>
-          <h2 className="text-2xl font-bold text-[#19475b] mb-4 text-center">
-            Create an Account
-          </h2>
-          <form action="#" method="POST" className="space-y-6">
-            <div>
-              <label className="block text-sm font-medium text-[#19475b] mb-1">
-                Name
-              </label>
-              <input
-                type="text"
-                placeholder="Enter your name"
-                className="p-2 border w-[300px] border-gray-300 rounded mb-4 focus:outline-none focus:ring-2"
-              />
-            </div>
-            <div>
-              <label className="block text-sm font-medium text-[#19475b] mb-1">
-                Email
-              </label>
-              <input
-                type="email"
-                placeholder="Enter your email"
-                className="p-2 border w-[300px] border-gray-300 rounded mb-4 focus:outline-none focus:ring-2"
-              />
-            </div>
-            <div>
-              <label className="block text-sm font-medium text-[#19475b] mb-1">
-                Create Password
-              </label>
-              <input
-                type="password"
-                placeholder="Create a password"
-                className="p-2 border w-[300px] border-gray-300 rounded mb-4 focus:outline-none focus:ring-2"
-              />
-            </div>
-            <div>
-              <label className="block text-sm font-medium text-[#19475b] mb-1">
-                Confirm Password
-              </label>
-              <input
-                type="password"
-                placeholder="Re-enter your password"
-                className="p-2 border w-[300px] border-gray-300 rounded mb-4 focus:outline-none focus:ring-2"
-              />
-            </div>
-            <button
-              type="submit"
-              className="bg-white text-black px-6 py-3 rounded-full my-6 cursor-pointer hover:bg-gray-100 transition duration-300 shadow-md hover:shadow-lg font-semibold"
-            >
-              Sign Up
-            </button>
-          </form>
-        </>
-      )}
-    </div>
-  );
 
-  const InfoPanel = (
-    <div className="p-8 primary-color text-white flex flex-col justify-center items-center text-center">
-      {showLogin ? (
-        <>
-          <h2 className="text-3xl font-bold mb-4">First time here? Awesome.</h2>
-          <p className="mb-6">
-            Sign up to plan smarter, work better, and get more done — with less
-            stress.
-          </p>
-          <button
-            onClick={() => setShowLogin(false)}
-            className="bg-white text-black px-6 py-3 rounded-full my-6 cursor-pointer hover:bg-gray-100 transition duration-300 shadow-md hover:shadow-lg font-semibold"
-          >
-            Sign Up
-          </button>
-        </>
-      ) : (
-        <>
-          <h2 className="text-3xl font-bold mb-4">Welcome back!</h2>
-          <p className="mb-6 w-full max-w-md px-4 mx-auto text-center">
-            Let's make today a productive one — no pressure, just progress. Log
-            in to get your tasks done.
-          </p>
-          <button
-            onClick={() => setShowLogin(true)}
-            className="bg-white text-black px-6 py-3 rounded-full my-6 cursor-pointer hover:bg-gray-100 transition duration-300 shadow-md hover:shadow-lg font-semibold"
-          >
-            Log In
-          </button>
-        </>
-      )}
-    </div>
-  );
-
-  return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100 px-4">
-      <div className="bg-white shadow-lg rounded-lg w-full max-w-4xl grid md:grid-cols-2 transition-all duration-500">
-        {showLogin ? (
-          <>
-            {InfoPanel}
-            {FormPanel}
-          </>
-        ) : (
-          <>
-            {FormPanel}
-            {InfoPanel}
-          </>
-        )}
-      </div>
-    </div>
+           <Link to="/signup">
+             <div className="flex mt-2 gap-2 lg:hidden mb-2">
+              <h3 className="text-sm pt-1">New here?</h3>
+              <p className="text-md text-[#19475b] pt-0.5">Create an Account</p>
+          </div>
+          </Link>
+       </div>
+      
+       </div>
   );
 };
 
