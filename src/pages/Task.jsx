@@ -3,24 +3,27 @@ import { AiOutlineCheck } from "react-icons/ai";
 import { AiOutlineClose } from "react-icons/ai";
 import { BiCategoryAlt } from "react-icons/bi";
 import { FaUser, FaBriefcase, FaBook, FaEllipsisH } from "react-icons/fa";
+import { AiOutlineDelete } from "react-icons/ai";
 import { useAppContext } from "../components/ContextProvider";
+import { useSelector, useDispatch } from "react-redux";
+import {addTask,deleteTask,markCancelled,markDone,clearTasks,setCategory,} from "../Redux/Slice";
 
 const Task = () => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
-  const [tasks, setTasks] = useState([]);
-  const [category, setCategory] = useState("");
+  const dispatch = useDispatch();
   const [showDropdown, setShowDropdown] = useState(false);
-
+  const { tasks, category } = useSelector((state) => state.task);
   const { isLightMode } = useAppContext();
 
   const handleAddTask = (e) => {
     e.preventDefault();
     if (title && description) {
-      setTasks([
-        ...tasks,
-        { title, description, done: false, cancelled: false, category },
-      ]);
+      dispatch(addTask({ title, description, category }));
+      // setTasks([
+      //   ...tasks,
+      //   { title, description, done: false, cancelled: false, category },
+      // ]);
       setTitle("");
       setDescription("");
       setCategory("");
@@ -40,19 +43,19 @@ const Task = () => {
   };
 
   return (
-    <div className="flex flex-col px-4 md:px-12 py-4">
-      <div className="justify-center items-center flex my-6">
-        <h1 className="text-3xl md:text-4xl font-bold text-center">
+    <div className="flex flex-col px-4 py-4">
+      <div className="justify-center items-center flex my-10">
+        <h1 className="text-2xl md:text-4xl font-bold">
           Create New Task
         </h1>
       </div>
 
       <div
-        className={`flex flex-row justify-between h-20 md:h-12 pt-2 px-6  ${
+        className={`flex flex-row justify-between rounded h-20 md:h-12 pt-2 md:pt-0  px-6  ${
           isLightMode ? "primary-color" : "bg-gray-100 text-[#287291]"
         }  gap-6 md:gap-0`}
       >
-        <h2 className="text-lg font-semibold ">Welcome Ahishat,</h2>
+        <h2 className="text-lg font-semibold pt-0 md:pt-2">Welcome Ahishat,</h2>
         <div className="relative flex md:gap-2 gap-0 flex-col md:flex-row items-center ">
           <h2 className="text-md font-medium ">Categories:</h2>
           <BiCategoryAlt
@@ -65,15 +68,19 @@ const Task = () => {
             </span>
           )}
           {showDropdown && (
-            <div className="absolute top-8 right-0 md:right-4 z-10 border secondary-color rounded shadow-md md:w-32">
+            <div className="absolute top-8 right-0 md:right-4 z-10 border secondary-color rounded shadow-md w-32">
               {categoryOptions.map(({ label, color }) => (
                 <div
                   key={label}
                   className={`px-3 py-2 cursor-pointer hover:bg-emerald-50 text-sm ${color}`}
                   onClick={() => {
-                    setCategory(label);
+                    dispatch(setCategory(label));
                     setShowDropdown(false);
                   }}
+                  // onClick={() => {
+                  //   setCategory(label);
+                  //   setShowDropdown(false);
+                  // }}
                 >
                   {label}
                 </div>
@@ -83,8 +90,8 @@ const Task = () => {
         </div>
       </div>
 
-      <div className="flex flex-col md:flex-row gap-6 md:gap-12  mt-10 justify-center items-center">
-        <div className="flex flex-row gap-2">
+      <div className="flex flex-col w-full max-w-6xl md:flex-row gap-6 items-center md:justify-center md:mt-10 mt-4">
+        <div className="flex flex-col md:flex-row items-start gap-2">
           <h2 className="text-md font-medium">Task Title:</h2>
           <input
             type="text"
@@ -93,10 +100,10 @@ const Task = () => {
             placeholder="Enter Task Title"
             className={`${
               isLightMode ? "" : "text-[#287291]"
-            } border-black shadow-green-800 shadow bg-gray-100 rounded w-48 h-8 pl-2`}
+            } border-black shadow-green-800 shadow bg-gray-100 rounded w-full md:w-48 h-8 pl-2`}
           />
         </div>
-        <div className="flex flex-row gap-2 ">
+        <div className="flex flex-col md:flex-row gap-2 items-start">
           <h2 className="text-md font-medium">Task Description:</h2>
           <input
             type="text"
@@ -105,23 +112,23 @@ const Task = () => {
             placeholder="Enter Task Title"
             className={`${
               isLightMode ? "" : "text-[#287291]"
-            } border-black shadow-green-800 shadow bg-gray-100 rounded w-48 md:w-96 h-8 pl-2`}
+            } border-black shadow-green-800 shadow bg-gray-100 rounded w-full md:w-96 h-8 pl-2`}
           />
         </div>
 
         <div
           onClick={handleAddTask}
           className={`${
-            isLightMode ? "primary-color" : "bg-gray-100 text-[#287291]"
-          } flex justify-center items-center w-16 h-10 rounded`}
+            isLightMode ? "primary-color" : "bg-gray-100 text-[#287291] hover:bg-[#287291] hover:text-white"
+          } flex justify-center items-center w-full md:w-16 h-10 rounded mt-2 md:mt-0 `}
         >
           <button className="text-sm ">Add</button>
         </div>
       </div>
 
-      <div className="mt-10 md:px-12">
+      <div className=" mt-10 w-full max-w-6xl">
         <h2 className="text-xl font-semibold mb-4">Added Tasks:</h2>
-        <div className="flex flex-col gap-4 w-72 md:w-full">
+        <div className="flex flex-col gap-4">
           {tasks.map((task, index) => (
             <div
               key={index}
@@ -134,8 +141,8 @@ const Task = () => {
               }`}
             >
               <div>
-                <h3 className="text-md font-bold">{task.title}</h3>
-                <p className="text-sm">{task.description}</p>
+                <h3 className="text-md font-bold text-black">{task.title}</h3>
+                <p className="text-sm text-black">{task.description}</p>
                 {task.category && (
                   <p
                     className={`text-xs italic ${
@@ -147,25 +154,35 @@ const Task = () => {
                 )}
               </div>
 
-              <div className="flex items-center gap-4">
+              <div className="flex flex-col md:flex-row items-center gap-2 md:gap-4">
                 <AiOutlineCheck
                   className="text-green-600 text-xl cursor-pointer"
-                  onClick={() => {
-                    const updatedTasks = [...tasks];
-                    updatedTasks[index].done = true;
-                    updatedTasks[index].cancelled = false;
-                    setTasks(updatedTasks);
-                  }}
+                  onClick={() => dispatch(markDone(index))}
+                  // onClick={() => {
+                  //   const updatedTasks = [...tasks];
+                  //   updatedTasks[index].done = true;
+                  //   updatedTasks[index].cancelled = false;
+                  //   setTasks(updatedTasks);
+                  // }}
                 />
                 <AiOutlineClose
                   className="text-red-600 text-xl cursor-pointer"
-                  onClick={() => {
-                    const updatedTasks = [...tasks];
-                    updatedTasks[index].cancelled = true;
-                    updatedTasks[index].done = false;
-                    setTasks(updatedTasks);
-                  }}
+                   onClick={() => dispatch(markCancelled(index))}
+                  // onClick={() => {
+                  //   const updatedTasks = [...tasks];
+                  //   updatedTasks[index].cancelled = true;
+                  //   updatedTasks[index].done = false;
+                  //   setTasks(updatedTasks);
+                  // }}
                 />
+                <AiOutlineDelete
+                 className="text-gray-700 text-xl cursor-pointer hover:text-red-600"
+                 onClick={() => dispatch(deleteTask(index))}
+                //  onClick={() => {
+                //   const updatedTasks = tasks.filter((_, i) => i !== index);
+                //   setTasks(updatedTasks);
+                //  }}
+                 />
               </div>
             </div>
           ))}
@@ -173,7 +190,8 @@ const Task = () => {
         {tasks.length > 0 && (
           <div className="mt-6 flex justify-end">
             <button
-              onClick={() => setTasks([])}
+            onClick={() => dispatch(clearTasks())}
+              // onClick={() => setTasks([])}
               className="bg-red-400 text-white px-4 py-2 rounded hover:bg-red-700 transition"
             >
               Clear All
