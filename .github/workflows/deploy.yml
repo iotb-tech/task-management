@@ -18,7 +18,7 @@ jobs:
     - name: Setup Node.js
       uses: actions/setup-node@v4
       with:
-        node-version: 24
+        node-version: 20
 
     # 🏗️ Step 3 — Install dependencies and build app
     - name: Install dependencies
@@ -27,17 +27,17 @@ jobs:
     - name: Build the Vite React app
       run: npm run build
 
-    # ☁️ Step 4 — Upload assets to Azure Blob
+    # ☁️ Step 4 — Log in to Azure
+    - name: Log in to Azure
+      uses: azure/login@v1
+      with:
+        creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+    # ☁️ Step 5 — Upload assets to Azure Blob
     - name: Upload built assets to Azure Blob
       uses: azure/cli@v2
       with:
         inlineScript: |
-          echo "🔐 Logging in to Azure..."
-          az login --service-principal \
-            -u ${{ fromJson(secrets.AZURE_CREDENTIALS).clientId }} \
-            -p ${{ fromJson(secrets.AZURE_CREDENTIALS).clientSecret }} \
-            --tenant ${{ fromJson(secrets.AZURE_CREDENTIALS).tenantId }}
-
           echo "☁️ Uploading assets to Azure Blob Storage..."
           az storage blob upload-batch \
             --account-name ${{ secrets.AZURE_STORAGE_ACCOUNT }} \
@@ -45,15 +45,15 @@ jobs:
             --source dist/assets \
             --overwrite
 
-    # 🐳 Step 5 — Build Docker image (React + Nginx)
+    # 🐳 Step 6 — Build Docker image (React + Nginx)
     - name: Build Docker image
       run: docker build -t taskmgt:latest .
 
-    # 📦 Step 6 — Save Docker image to tar
+    # 📦 Step 7 — Save Docker image to tar
     - name: Save Docker image as tar
       run: docker save taskmgt:latest -o taskmgt.tar
 
-    # 📤 Step 7 — Copy Docker image to Ubuntu server
+    # 📤 Step 8 — Copy Docker image to Ubuntu server
     - name: Upload image to Ubuntu server
       uses: appleboy/scp-action@v0.1.7
       with:
@@ -63,7 +63,7 @@ jobs:
         source: "taskmgt.tar"
         target: "~/"
 
-    # ⚙️ Step 8 — SSH into server and deploy container
+    # ⚙️ Step 9 — SSH into server and deploy container
     - name: SSH into server and deploy app
       uses: appleboy/ssh-action@v1.2.0
       with:
